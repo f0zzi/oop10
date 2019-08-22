@@ -73,9 +73,7 @@ public:
 			filename += ".txt";
 		ofstream out(filename, ios::out);
 		if (!out)
-		{
 			cerr << "Error opening file " << filename << " for writing" << endl;
-		}
 		else
 		{
 			out << p.GetName() << endl;
@@ -91,9 +89,7 @@ public:
 			filename += ".txt";
 		ifstream in(filename, ios::in);
 		if (!in)
-		{
 			cerr << "Error opening file " << filename << " for reading" << endl;
-		}
 		else
 		{
 			string name;
@@ -118,13 +114,9 @@ public:
 			filename += ".dat";
 		ofstream out(filename, ios_base::binary);
 		if (!out)
-		{
 			cerr << "Error opening file " << filename << endl;
-		}
 		else
-		{
 			out.write((char*)& p, sizeof(p));
-		}
 	}
 	void readProduct(string filename, Product& p)
 	{
@@ -133,12 +125,8 @@ public:
 			filename += ".dat";
 		ifstream in(filename, ios_base::binary);
 		if (!in)
-		{
 			cerr << "Error opening file " << filename << endl;
-		}
 		else
-		{
 			in.read((char*)& p, sizeof(p));
-		}
 	}
 };
