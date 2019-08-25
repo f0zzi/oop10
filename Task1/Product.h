@@ -6,12 +6,12 @@ using namespace std;
 class Product
 {
 private:
-	char* name = nullptr;
+	string name;
 	double price = 0;
 	int quantity = 0;
 public:
 	Product() :Product("Product", 0, 0) {}
-	Product(const char* name, double price, int quantity)
+	Product(string name, double price, int quantity)
 	{
 		SetName(name);
 		SetPrice(price);
@@ -23,14 +23,11 @@ public:
 		this->quantity = other.quantity;
 		this->SetName(other.GetName());
 	}
-	void SetName(const char* name)
+	void SetName(string name)
 	{
-		if (this->name != nullptr)
-			delete[] this->name;
-		this->name = new char[strlen(name) + 1];
-		strcpy_s(this->name, strlen(name) + 1, name);
+		this->name = name;
 	}
-	const char* GetName() const
+	string GetName() const
 	{
 		return name;
 	}
@@ -55,11 +52,6 @@ public:
 	void Info() const
 	{
 		cout << "Product: " << name << "\tPrice: " << price << "\tQuantity: " << quantity << endl;
-	}
-	~Product()
-	{
-		if (this->name != nullptr)
-			delete[] this->name;
 	}
 };
 
