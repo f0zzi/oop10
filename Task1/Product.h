@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <string>
 using namespace std;
 
 class Product
@@ -108,7 +109,15 @@ public:
 		if (!out)
 			cerr << "Error opening file " << filename << endl;
 		else
-			out.write((char*)& p, sizeof(p));
+		{
+			double price = p.GetPrice();
+			int quantity = p.GetQuantity();
+			int size = p.GetName().size();
+			out.write((char*)& size, sizeof(size));
+			out.write((char*) p.GetName().data(), size * sizeof(char));
+			out.write((char*)& price, sizeof(price));
+			out.write((char*)& quantity, sizeof(quantity));
+		}
 	}
 	void readProduct(string filename, Product& p)
 	{
@@ -119,6 +128,19 @@ public:
 		if (!in)
 			cerr << "Error opening file " << filename << endl;
 		else
-			in.read((char*)& p, sizeof(p));
+		{
+			double price;
+			int quantity;
+			int size;
+			in.read((char*)& size, sizeof(int));
+			char* tmp = new char[size + 1];
+			in.read((char*) tmp, size * sizeof(char));
+			tmp[size] = '\0';
+			in.read((char*)& price, sizeof(price));
+			in.read((char*)& quantity, sizeof(quantity));
+			p.SetName(tmp);
+			p.SetPrice(price);
+			p.SetQuantity(quantity);
+		}
 	}
 };

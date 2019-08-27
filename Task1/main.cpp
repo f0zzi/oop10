@@ -4,10 +4,10 @@ using namespace std;
 
 int main()
 {
-	Product test("test", 1, 1);
+	Product test("tesjhdjfhdskjfhkdjshfkjsdhfkjdshfjkhdsfkjsdhkjfhsdkfhksdjhfkdsjfh1", 99.99, 99);
 
 	BinSerializerProduct bin;
-	bin.writeProduct("test", test);
+	//bin.writeProduct("test", test);
 	Product* test2 = new Product;
 	bin.readProduct("test", *test2);
 	test2->Info();
